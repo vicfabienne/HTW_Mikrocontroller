@@ -4,14 +4,14 @@ const int dly = 1000;                                   // delay (1 s)
 
 
 void setup() {
-  for (int i = 0; i < numLeds; i++){
+  for (int i = 0; i < numLeds-1; i++){                  // -1 da die Schleife nur 3 zusätzliche iterationen durchlaufen soll (basierend auf warning beim compilieren)
     pinMode(ledPins[i], OUTPUT);                        // Pins 10-13 werden als Outputs deklariert 
   }
 }
 
 
 void setLED(int value){
-    for (int n=0; n < numLeds; n++) {                    // Zählt Bitstellen und Pinnr. für LED
+    for (int n=0; n < numLeds-1; n++) {                    // Zählt Bitstellen und Pinnr. für LED
       if (bitRead(value, n)) digitalWrite(ledPins[n], LOW);   // Wenn Bit an Stelle n = 1, schalte LED an
       else digitalWrite(ledPins[n], HIGH);                    // Wenn Bit an Stelle n = 0, schalte LED aus
   }
