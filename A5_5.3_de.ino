@@ -38,10 +38,9 @@ void setup() {
   attachInterrupt(0, ISR_taster, CHANGE);     // Interruptfunktion für das Tastendrücken, 0 --> externer Interrupt(muss normalerweise über Funktion angesteuert werden)
 }
 
-// RISING: sofort bei button klick --> 0 
-// FALLING: sofort bei button klick --> 0
-// CHANGE: sofort bei button klick --> 0
-// --> zumindest in WokWi konnte ich spontan keinen Unterschied feststellen
+// RISING: Interrupttrigger, wenn der Pin von LOW auf HIGH wechselt
+// FALLING: Interrupttrigger, wenn der Pin von HIGH auf LOW wechselt
+// CHANGE: Interrupttrigger, wenn der Pin den Wert ändert
 
 
 void loop() {
