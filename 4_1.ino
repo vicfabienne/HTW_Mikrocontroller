@@ -32,6 +32,9 @@ void getAccel(int *x, int *y, int *z) {
   Wire.endTransmission(false);          //setzt stop Parameter falsch zur Erhaltung einer wiederholten Startbedingung für die nächsten Leseoperationen 
   Wire.requestFrom(MPU, 6, true);      //fordert 6 Bytes Daten vom MPU-6050 an und wartet auf die Daten.
 
+
+  // Verfahren hier: 
+  //  Byte from I2C bus lesen, byte um 8 bit nach links verschieben um "platz für das nächste byte" zu schaffen, bitwise OR kombinieren, durch 4.095 teilen
   *x = (Wire.read() << 8 | Wire.read())/4.095;  // Teilt durch 4.095, um die Rohdaten in g umzurechnen
   *y = (Wire.read() << 8 | Wire.read())/4.095;
   *z = (Wire.read() << 8 | Wire.read())/4.095;
