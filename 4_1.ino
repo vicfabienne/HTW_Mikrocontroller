@@ -1,8 +1,8 @@
 #include <Wire.h>
 const int MPU = 0x68;                   // I2C-Adresse des MPU-6050
-const int PWR = 0x6B;                   // Registeradresse für das PWR_MGMT_1-Register
-const int ACC = 0x1C;                   // Registeradresse für das ACCEL_CONFIG-Register
-const int del = 100;                    //delay in ms
+const int PWR = 0x6B;                   // Registeradresse für das PWR_MGMT_1-Register (Powermanagement) --> 1 --> sleep
+const int ACC = 0x1C;                   // Registeradresse für das ACCEL_CONFIG-Register --> 0, Empfindlichkeit des Sensors
+const int del = 100;                    // delay in ms
 int x, y, z;                            // Variablen für die Beschleunigung
 
 void setup() {
@@ -20,6 +20,12 @@ void setup() {
   Wire.endTransmission();
 }
 
+/** 
+  * zum lesen der Beschleunigungsdaten von der X-,Y- und Z achse des MPU
+  * Parameter über "call by reference" übergeben, da wir nicht mit festen werten arbeiten, sondern mit veränderlichen, die auch außerhalb der Funktion verfügbar sein sollen
+  * In dem Fall werden sie hier gespeichert, um dann in Loop über die Serielle Schnittstelle ausgegeben werden zu können
+
+*/
 void getAccel(int *x, int *y, int *z) {
   Wire.beginTransmission(MPU);
   Wire.write(0x3B);                      // Starte die Leseoperation ab der X-Achse
