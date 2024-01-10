@@ -15,7 +15,6 @@ void delay_ms(unsigned int ms) {  // Verzögerungsfunktion
 void ISR_wait(){                      // ISRs akzeptieren keine Parameter! 
   // LDR wert lesen
   int ldrwert = analogRead(LDR);
-  Serial.println(ldrwert,DEC);   
   delay_ms(ldrwert);
 }
 
@@ -38,6 +37,7 @@ void loop() {
 
   // standard blinken 1Hz - Aber abhängig von LDR value, da je nach LDR wert, der delay um entsprechende Dauer verlängert wird
   digitalWrite(BLINK, !digitalRead(BLINK));
+  Serial.println(ldrwert,DEC);            // print statement nicht in ISR da das die Funktion verzögert
   delay(500);
   digitalWrite(BLINK, !digitalRead(BLINK));
   delay(500);
